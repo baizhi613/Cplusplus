@@ -1,8 +1,19 @@
-#include<iostream>
-#include<string>
-using namespace std;
+#include"string.h"
+using namespace bit;
+void test()
+{
+	bit::string a("abc");
+	bit::string b = a;
+	a.push_back('a');
+	a.append("abc");
+	cout << a;
+	b.erase(0, 1);
+	b.clear();
+	cout << b;
+}
 int main()
 {
+	test();
 	//string a;
 	//getline(cin, a);
 	//cout << "返回字符串的长度："<<a.size() << endl;
@@ -41,10 +52,5 @@ int main()
 	//cout << b << endl;
 	//string n{ "1234" };
 	//cout << n << endl;
-	string a("abc");
-	string b(a);
-	cout << b;
-	a.push_back('d');
-	cout << a;
 	return 0;
 }

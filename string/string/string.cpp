@@ -1,7 +1,7 @@
 #include"string.h"
 namespace bit
 {
-	string::string(const char* str = "")
+	string::string(const char* str)
 	{
 		_size = strlen(str);
 		_capacity = _size;
@@ -130,5 +130,81 @@ namespace bit
 			strcpy(_str + pos, _str + pos + len);
 			_size -= len;
 		}
+	}
+	size_t string::find(char ch, size_t pos)
+	{
+		for (size_t i = pos; i < _size; i++)
+		{
+			if (_str[i] == ch)
+			{
+				return i;
+			}
+		}
+		return npos;
+	}
+	size_t string::find(const char* str, size_t pos)
+	{
+		const char* ptr = strstr(_str + pos, str);
+		if (ptr == nullptr)
+		{
+			return npos;
+		}
+		else
+		{
+			return ptr - _str;
+		}
+	}
+	string string::substr(size_t pos, size_t len)
+	{
+		assert(pos < _size);
+		size_t end = pos + len;
+		if (len == npos || pos + len >= _size)
+		{
+			len = _size;
+		}
+		string str;
+		str.reserve(end - pos);
+		for (size_t i = pos; i < _size; i++)
+		{
+			str += _str[i];
+		}
+		return str;
+	}
+	void string::clear()
+	{
+		_size = 0;
+		_str[0] = '\0';
+	}
+	ostream& operator<<(ostream& out, const string& s)
+	{
+		for (auto ch : s)
+		{
+			out << ch;
+		}
+		return out;
+	}
+	istream& operator>>(istream& in, string& s)
+	{
+		s.clear();
+		char buff[128];
+		char ch = in.get();
+		int i = 0;
+		while (ch != ' ' && ch != '\n')
+		{
+			buff[i++] = ch;
+			if (i == 127)
+			{
+				buff[i] = '\0';
+				s += buff;
+				i = 0;
+			}
+			ch = in.get();
+		}
+		if (i > 0)
+		{
+			buff[i] = '\0';
+			s += buff;
+		}
+		return in;
 	}
 }
