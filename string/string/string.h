@@ -3,12 +3,12 @@
 #include<iostream>
 #include<assert.h>
 using namespace std;
-namespace bit {
-	class string
+namespace bit {//命名空间bit
+	class string//自定义string类
 	{
 	public:
-		typedef char* iterator;
-		typedef const char* const_iterator;
+		typedef char* iterator;//迭代器
+		typedef const char* const_iterator;//静态迭代器
 		iterator begin()
 		{
 			return _str;
